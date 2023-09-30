@@ -43,4 +43,13 @@ public class User {
     public void setPass_hash(String pass_hash) {
         this.pass_hash = pass_hash;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", pass_hash='" + pass_hash + '\'' +
+                '}';
+    }
 }
