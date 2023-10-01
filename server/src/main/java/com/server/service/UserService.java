@@ -14,26 +14,17 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    public Optional<User> findById(String id) {
-        return userRepository.findById(id);
-    }
-
     public Optional<User> findByUsername(String username) {
         return userRepository.findAll()
                 .stream()
                 .filter(user -> Objects.equals(user.getUsername(), username))
                 .findFirst();
     }
-
-    public User save(User user) {
-        return userRepository.save(user);
+    public Integer findNumberOfUser() {
+        List<User> users = userRepository.findAll();
+        return users.size();
     }
-
-    public void deleteById(String id) {
-        userRepository.deleteById(id);
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
