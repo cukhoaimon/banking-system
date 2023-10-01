@@ -1,9 +1,6 @@
 package com.server.security;
 
-import com.server.model.User;
-import com.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,11 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 @Configuration
 public class AuthenticationProvider implements org.springframework.security.authentication.AuthenticationProvider {
@@ -25,7 +18,6 @@ public class AuthenticationProvider implements org.springframework.security.auth
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // mapping and check authentication in database
         final String username = authentication.getName();
 
         if (username.isEmpty()) {
@@ -47,7 +39,6 @@ public class AuthenticationProvider implements org.springframework.security.auth
         else {
             throw new BadCredentialsException("wrong password");
         }
-
     }
 
     @Override
