@@ -29,7 +29,7 @@ public class AuthenticationProvider implements org.springframework.security.auth
             user = userDetailsService.loadUserByUsername(username);
         }
         catch (UsernameNotFoundException ex) {
-            throw new BadCredentialsException("invalid login details");
+            throw new BadCredentialsException("Invalid login details");
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -37,7 +37,7 @@ public class AuthenticationProvider implements org.springframework.security.auth
             return new UsernamePasswordAuthenticationToken(user.getUsername(), authentication.getCredentials(), user.getAuthorities() );
         }
         else {
-            throw new BadCredentialsException("wrong password");
+            throw new BadCredentialsException("Wrong password");
         }
     }
 

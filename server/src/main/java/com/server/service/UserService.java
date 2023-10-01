@@ -24,6 +24,10 @@ public class UserService {
         List<User> users = userRepository.findAll();
         return users.size();
     }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
     public List<User> findAll() {
         return userRepository.findAll();
     }

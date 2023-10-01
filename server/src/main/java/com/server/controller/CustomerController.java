@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/users/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
 
     @GetMapping
     ResponseEntity<?> getCustomer(
-            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String query,
             @RequestParam(required = false) String value
     ) {
         ResponseEntity<?> response = null;
 
         try {
-            if (type == null) {
+            if (query == null) {
                 List<Customer> customers = new ArrayList<Customer>(customerService.findAll());
 
                 if (customers.isEmpty()) {
@@ -35,7 +35,7 @@ public class CustomerController {
                 return response;
             }
 
-            // type is not null
+            // query is not null
             if (value == null) {
                 response = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
@@ -43,7 +43,7 @@ public class CustomerController {
             }
 
 
-            Optional<Customer> customer = switch (type) {
+            Optional<Customer> customer = switch (query) {
                 case "name" -> customerService.findByName(value);
                 case "email" -> customerService.findByEmail(value);
                 case "phone" -> customerService.findByPhone(value);
