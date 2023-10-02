@@ -70,7 +70,7 @@ public class CustomerController {
                             customer.getEmail(),
                             customer.getPhone(),
                             customer.getAddress(),
-                            customer.getAccount_ids()));
+                            customer.getAccountIds()));
 
             response = new ResponseEntity<>(_customer, HttpStatus.CREATED);
         } catch (Exception e) {

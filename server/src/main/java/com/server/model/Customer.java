@@ -13,18 +13,19 @@ public class Customer {
     String email;
     String phone;
     String address;
-    List<String> account_ids;
+    List<String> accountIds;
 
     public Customer() {
+
     }
 
-    public Customer(String id, String name, String email, String phone, String address, List<String> account_ids)   {
+    public Customer(String id, String name, String email, String phone, String address, List<String> accountIds)   {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.account_ids = account_ids;
+        this.accountIds = accountIds;
     }
 
     public String getId() {
@@ -67,11 +68,11 @@ public class Customer {
         this.address = address;
     }
 
-    public List<String> getAccount_ids() {
-        return account_ids;
+    public List<String> getAccountIds() {
+        return accountIds;
     }
 
-    public void setAccount_ids(List<String> account_ids) {
-        this.account_ids = account_ids;
+    public void setAccountIds(List<String> accountIds) {
+        this.accountIds = accountIds;
     }
 }
