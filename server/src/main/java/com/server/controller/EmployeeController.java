@@ -1,5 +1,6 @@
 package com.server.controller;
 
+import com.mongodb.client.model.Collation;
 import com.server.model.Employee;
 import com.server.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin/employees")
@@ -24,7 +26,13 @@ public class EmployeeController {
         ResponseEntity<?> response = null;
 
         if (query == null) {
-            response = new ResponseEntity<>(employeeService.findAll(), HttpStatus.OK);
+            List<Employee> employees = employeeService.findAll();
+            if (employees.isEmpty()) {
+                response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            else {
+                response = new ResponseEntity<>(employees, HttpStatus.OK);
+            }
         } else {
             if (payload == null) {
                 response = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -59,5 +67,28 @@ public class EmployeeController {
     public ResponseEntity<?> deleteEmployeeById(@PathVariable("id") String id) {
         employeeService.deleteByID(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public  ResponseEntity<?> updateEmployeeById(
+            @RequestBody Employee newEmployee,
+            @PathVariable("id") String id
+    )
+    {
+        Employee emp = employeeService.findById(id)
+                .map(employee -> {
+                    employee.setName(newEmployee.getName());
+                    employee.setPhone(newEmployee.getPhone());
+                    employee.setPosition(newEmployee.getPosition());
+                    employee.setManagerId(newEmployee.getManagerId());
+                    employee.setUserId(newEmployee.getUserId());
+                    return employeeService.save(newEmployee);
+                })
+                .orElseGet(() -> {
+                    newEmployee.setId(id);
+                    return employeeService.save(newEmployee);
+                });
+
+        return new ResponseEntity<>(emp, HttpStatus.ACCEPTED);
     }
 }

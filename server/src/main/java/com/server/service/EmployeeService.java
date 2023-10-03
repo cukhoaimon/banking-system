@@ -14,8 +14,8 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Optional<List<Employee>> findAll() {
-        return Optional.of(employeeRepository.findAll());
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
     }
 
     public Optional<Employee> findById(String id) {
@@ -56,8 +56,5 @@ public class EmployeeService {
 
     public void deleteByID(String id) {
         employeeRepository.deleteById(id);
-    }
-
-    public void deleteByName(String name) {
     }
 }
