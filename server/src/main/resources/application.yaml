@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      uri: "mongodb+srv://cukhoaimon:kPR9gg2mB03Rq5lF@cluster0.fpia5z1.mongodb.net/?retryWrites=true&w=majority"
+      uri: "mongodb+srv://cukhoaimon:bD8l2pisvJEyAvpt@cluster0.fpia5z1.mongodb.net/"
       database: "Banking"
